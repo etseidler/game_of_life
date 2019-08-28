@@ -23,20 +23,20 @@ def test_new_instance_creates_empty_grid():
 
 @pytest.mark.parametrize("size", [1, 2, 4, 8, 16, 32, 64])
 def test_grid_size(size):
-    game = Game(size)
+    game = Game(size, size)
     assert len(game.grid) == size
     assert all(len(row) == size for row in game.grid)
 
 
 def test_a_cell_is_defaulted_to_dead():
-    game = Game(1)
+    game = Game(1, 1)
 
     assert len(game.grid) == 1
     assert str(game) == Game.DEAD
 
 
 def test_can_mark_a_cell_as_alive():
-    game = Game(3)
+    game = Game(3, 3)
     cell_1_1 = Cell(1, 1)
 
     game.mark_alive(cell_1_1)
@@ -87,7 +87,7 @@ def test_new_state_for_live_cells(initial_state, live_neighbors, new_state):
     (Game.DEAD, neighbors_for_middle_cell, Game.DEAD)
 ])
 def test_middle_cell_with_neighbors(initial_state, live_neighbors, new_state):
-    game = Game(3)
+    game = Game(3, 3)
     middle_cell = Cell(1, 1)
     game.mark_cell(middle_cell, initial_state)
     for cell in live_neighbors:
@@ -109,7 +109,7 @@ def test_middle_cell_with_neighbors(initial_state, live_neighbors, new_state):
     (Game.DEAD, neighbors_for_upper_left_cell, Game.ALIVE),
 ])
 def test_UL_cell_with_neighbors(initial_state, live_neighbors, new_state):
-    game = Game(3)
+    game = Game(3, 3)
     upper_left_cell = Cell(0, 0)
     game.mark_cell(upper_left_cell, initial_state)
     for cell in live_neighbors:
@@ -129,7 +129,7 @@ def test_UL_cell_with_neighbors(initial_state, live_neighbors, new_state):
     (Game.ALIVE, neighbors_for_upper_center_cell, Game.DEAD)
 ])
 def test_UC_cell_with_neighbors(initial_state, live_neighbors, new_state):
-    game = Game(3)
+    game = Game(3, 3)
     upper_center_cell = Cell(0, 1)
     game.mark_cell(upper_center_cell, initial_state)
     for cell in live_neighbors:

@@ -11,8 +11,8 @@ class Game(object):
     ALIVE = '\u2588'
     DEAD = ' '
 
-    def __init__(self, dim=0):
-        self.grid = [list(' ' * dim) for r in range(dim)]
+    def __init__(self, rows=0, cols=0):
+        self.grid = [list(' ' * cols) for r in range(rows)]
 
     def __str__(self):
         return '\n'.join(''.join(row) for row in self.grid)
@@ -63,10 +63,10 @@ class Game(object):
 
 
 if __name__ == '__main__':
-    game = Game(35)
+    game = Game(35, 300)
     game.random_seed()
     for _ in range(10000):
         os.system('clear')
         print(str(game))
         game.tick()
-        sleep(0.1)
+        sleep(0.2)
