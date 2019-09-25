@@ -35,6 +35,33 @@ def test_a_cell_is_defaulted_to_dead():
     assert str(game) == Game.DEAD
 
 
+def test_can_get_a_single_cell():
+    game = Game(3, 3)
+
+    assert game.get_cell(Cell(1, 1)) == Game.DEAD
+
+
+def test_all_cells_are_defaulted_to_dead():
+    game = Game(10, 10)
+
+    assert all(i == Game.DEAD for row in game.grid for i in row)
+
+
+def test_can_return_a_string_representation_with_all_dead_cells():
+    game = Game(2, 3)
+
+    assert game.__str__() == '   \n   '
+
+
+def test_can_return_a_string_representation_with_some_living_cells():
+    game = Game(3, 3)
+    alive_cells = [Cell(0, 2), Cell(1, 1), Cell(2, 0)]
+    for cell in alive_cells:
+        game.mark_cell(cell, Game.ALIVE)
+
+    assert game.__str__() == '  {}\n {} \n{}  '.format(*[Game.ALIVE]*3)
+
+
 def test_can_mark_a_cell_as_alive():
     game = Game(3, 3)
     cell_1_1 = Cell(1, 1)
@@ -42,6 +69,17 @@ def test_can_mark_a_cell_as_alive():
     game.mark_alive(cell_1_1)
 
     assert game.get_cell(cell_1_1) == Game.ALIVE
+
+
+def test_can_mark_a_cell_as_dead_or_alive():
+    game = Game(3, 3)
+    cell_1_1 = Cell(1, 1)
+
+    game.mark_cell(cell_1_1, Game.ALIVE)
+    assert game.get_cell(cell_1_1) == Game.ALIVE
+
+    game.mark_cell(cell_1_1, Game.DEAD)
+    assert game.get_cell(cell_1_1) == Game.DEAD
 
 
 @pytest.mark.parametrize("initial_state,live_neighbors,new_state", [
