@@ -2,19 +2,6 @@ import pytest
 from game_of_life import Game, Cell
 
 
-neighbors_for_upper_left_cell = [
-    Cell(0, 1), Cell(1, 0), Cell(1, 1)
-]
-neighbors_for_upper_center_cell = [
-    Cell(0, 0), Cell(1, 0), Cell(1, 1), Cell(1, 2), Cell(0, 2)
-]
-neighbors_for_middle_cell = [
-    Cell(0, 0), Cell(0, 1), Cell(0, 2),
-    Cell(1, 0), Cell(1, 2),
-    Cell(2, 0), Cell(2, 1), Cell(2, 2)
-]
-
-
 def test_new_instance_creates_empty_grid():
     game = Game()
 
@@ -82,6 +69,7 @@ def test_can_mark_a_cell_as_dead_or_alive():
     assert game.get_cell(cell_1_1) == Game.DEAD
 
 
+@pytest.mark.skip()
 @pytest.mark.parametrize("initial_state,live_neighbors,new_state", [
     (Game.ALIVE, 0, Game.DEAD),
     (Game.ALIVE, 1, Game.DEAD),
@@ -106,6 +94,14 @@ def test_new_state_for_live_cells(initial_state, live_neighbors, new_state):
     assert Game.new_state(initial_state, live_neighbors) == new_state
 
 
+neighbors_for_middle_cell = [
+    Cell(0, 0), Cell(0, 1), Cell(0, 2),
+    Cell(1, 0), Cell(1, 2),
+    Cell(2, 0), Cell(2, 1), Cell(2, 2)
+]
+
+
+@pytest.mark.skip()
 @pytest.mark.parametrize("initial_state,live_neighbors,new_state", [
     (Game.ALIVE, neighbors_for_middle_cell[0:1], Game.DEAD),
     (Game.ALIVE, neighbors_for_middle_cell[0:2], Game.ALIVE),
@@ -136,6 +132,12 @@ def test_middle_cell_with_neighbors(initial_state, live_neighbors, new_state):
     assert game.get_cell(middle_cell) == new_state
 
 
+neighbors_for_upper_left_cell = [
+    Cell(0, 1), Cell(1, 0), Cell(1, 1)
+]
+
+
+@pytest.mark.skip()
 @pytest.mark.parametrize("initial_state,live_neighbors,new_state", [
     (Game.ALIVE, [], Game.DEAD),
     (Game.ALIVE, neighbors_for_upper_left_cell[0:1], Game.DEAD),
@@ -158,6 +160,12 @@ def test_UL_cell_with_neighbors(initial_state, live_neighbors, new_state):
     assert game.get_cell(upper_left_cell) == new_state
 
 
+neighbors_for_upper_center_cell = [
+    Cell(0, 0), Cell(1, 0), Cell(1, 1), Cell(1, 2), Cell(0, 2)
+]
+
+
+@pytest.mark.skip()
 @pytest.mark.parametrize("initial_state,live_neighbors,new_state", [
     (Game.ALIVE, [], Game.DEAD),
     (Game.ALIVE, neighbors_for_upper_center_cell[0:1], Game.DEAD),
