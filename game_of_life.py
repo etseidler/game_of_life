@@ -12,7 +12,7 @@ class Game(object):
     DEAD = ' '
 
     def __init__(self, rows=0, cols=0):
-        self.grid = [list(' ' * cols) for r in range(rows)]
+        self.grid = [list(Game.DEAD * cols) for r in range(rows)]
 
     def __str__(self):
         return '\n'.join(''.join(row) for row in self.grid)
