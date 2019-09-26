@@ -5,7 +5,7 @@
     * `brew update && brew install pyenv`
     * `pyenv install 3.7.4 && pyenv global 3.7.4`
     * `python --version` or `python`
-1. Create a new virtual environment: `python -m venv env` and `source env/bin/activate`
+1. Create a new virtual environment: `python -m venv env && source env/bin/activate`
 2. Install the required packages: `pip install -r requirements.txt`
 3. Run the tests: `ptw` will run the tests and watch for changes
 4. Write code and make the tests pass
